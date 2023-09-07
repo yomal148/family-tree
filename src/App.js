@@ -7,8 +7,6 @@ import backgroundImage from './img/family_tree.png';
 import NodeModal from './components/NodeModal';
 //import DefaultText from './components/DefaultText';
 
-
-
 const containerStyle= {
   width: '100vw',
   height: '100vh',
@@ -18,7 +16,8 @@ const containerStyle= {
   backgroundRepeat: 'no-repeat',
   display: 'flex', 
   alignItems: "center",
-  justifyContent:'center'
+  justifyContent:'center', 
+  
 }
 
 function App() {
