@@ -13,11 +13,9 @@ const containerStyle= {
   backgroundImage: `url(${backgroundImage})`,
   backgroundPosition: 'center',
   backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
   display: 'flex', 
   alignItems: "center",
   justifyContent:'center', 
-  
 }
 
 function App() {

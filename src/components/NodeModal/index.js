@@ -41,8 +41,8 @@ function NodeModal(/*{children}*/){
         //<div style={circleStyle} onClick={toggleShow}> {visibility && children} {buttonText} </div>
         <>
         <Button style={{ display: "flex",  width: "100px", height: "100px", 
-        backgroundColor: "white", borderRadius: "50%", /*top: "calc(100vh - 60px)"*/}}
-        onClick={onOpen}> Parent Node 
+        backgroundColor: "white", borderRadius: "50%", position: 'absolute',
+        top: '10px',}} onClick={onOpen}> Parent Node 
         </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -52,12 +52,15 @@ function NodeModal(/*{children}*/){
             <ModalBody>
                 <FormControl>
                     <FormLabel>Name</FormLabel>
-                    {/*<FormLabel>Family Role</FormLabel>*/}
                     <Input
                         value = {text}
                         onChange={(handleChange)}
                     />
                     <FormLabel>Age</FormLabel>
+                    <Input
+                        value = {text}
+                        onChange={(handleChange)}
+                    />
                 </FormControl>
             </ModalBody>
 
