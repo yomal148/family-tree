@@ -4,8 +4,10 @@ import './App.css';
 //import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 import backgroundImage from './img/family_tree.png';
-import Modal from './components/NodeModal';
+import NodeModal from './components/NodeModal';
 //import DefaultText from './components/DefaultText';
+
+
 
 const containerStyle= {
   width: '100vw',
@@ -22,7 +24,7 @@ const containerStyle= {
 function App() {
   return (
     <div style={containerStyle}>
-      <Modal />
+      <NodeModal />
     </div>
   );
 }
