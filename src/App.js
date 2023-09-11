@@ -5,7 +5,9 @@ import './App.css';
 
 import backgroundImage from './img/family_tree.png';
 import NodeModal from './components/NodeModal';
-//import DefaultText from './components/DefaultText';
+
+import { Button } from "@chakra-ui/button";
+
 
 const containerStyle= {
   width: '100vw',
@@ -14,15 +16,22 @@ const containerStyle= {
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   display: 'flex', 
-  alignItems: "center",
-  justifyContent:'center', 
+  alignItems: "center", 
+  justifyContent:'center',
 }
 
 function App() {
   return (
-    <div style={containerStyle}>
-      <NodeModal />
-    </div>
+    
+      <div style={containerStyle}>
+        <Button style={{ display: "flex",  width: "100px", height: "100px", 
+          backgroundColor: "lightBlue", borderRadius: "50%", textAlign: "center", top: '-1px', position: 'absolute', 
+          }}> <p1> Root </p1>
+        </Button> 
+        <NodeModal/>
+      </div>
+  
+    
   );
 }
 

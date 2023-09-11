@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Button } from "@chakra-ui/button";
-import { useDisclosure } from '@chakra-ui/react';
+import { Grid, useDisclosure } from '@chakra-ui/react';
 
 import {
     Modal,
@@ -14,35 +14,30 @@ import {
 
 import { FormControl, FormLabel, Input} from '@chakra-ui/react';
 
-function NodeModal(/*{children}*/){
-    // Code to toggle visibility using the useState hook
-    /*
-    const [visibility, setVisibility] = useState(true);
-    function toggleShow(){
-        setVisibility(!visibility);
-    }
-    let buttonText = visibility ? 'Hide Node' : 'Show Node'
-    */
-
-    /**
-     * The useDisclosure hook returns an object with the following fields
-     * isOpen	boolean	 false	If true, it sets the controlled component to its visible state.
-     * onOpen	function		Callback function to set a truthy value for the isOpen parameter.
-     * onClose	function		Callback function to set a falsy value for the isOpen parameter.
-     */
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const onSubmit = () => {return}
+function NodeModal(props){
+    const { isOpen, onOpen, onClose } = useDisclosure();
     // set text for modal to empty string
-    const [text, setText] = useState("")
+    const [text, setText] = useState("");
     // handleChange is a function to pass through onChange to handle element changes
     const handleChange = (event) => setText(event.target.value)
 
+    const [number, setNumber] = useState(0);
+    function handleNumberChange(event){
+        if (event.target.value < 0) event.target.value = 0;
+        if (event.target.value > 3) event.target.value = 3;
+        setNumber(event.target.value);
+    }
+
+    function createButtons(){
+        for (let i = 1; i <= number; i++) {
+            console.log(i);
+          }
+    }
     return(
-        //<div style={circleStyle} onClick={toggleShow}> {visibility && children} {buttonText} </div>
         <>
         <Button style={{ display: "flex",  width: "100px", height: "100px", 
-        backgroundColor: "white", borderRadius: "50%", position: 'absolute',
-        top: '10px',}} onClick={onOpen}> Parent Node 
+        backgroundColor: "lightBlue", borderRadius: "50%", textAlign: "center", top: "-1px"
+        }} onClick={onOpen}> <p1> {text} </p1>
         </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -51,23 +46,22 @@ function NodeModal(/*{children}*/){
             <ModalCloseButton />
             <ModalBody>
                 <FormControl>
+                    <FormLabel>How many family members do you want to add? Limit: 3</FormLabel>
+                    <Input
+                    type="number"
+                    value = {number}
+                    onChange={(handleNumberChange)}
+                    />
+                    <Button color='blue.500' variant="solid" mr={3} onClick={createButtons}>Add</Button>
                     <FormLabel>Name</FormLabel>
                     <Input
-                        value = {text}
-                        onChange={(handleChange)}
-                    />
-                    <FormLabel>Age</FormLabel>
-                    <Input
-                        value = {text}
+                    value = {text}
                         onChange={(handleChange)}
                     />
                 </FormControl>
             </ModalBody>
-
             <ModalFooter>
-                <Button color='blue.500' variant="solid" mr={3} onClick={() => onSubmit(text)} disabled={!text}>
-                Add
-                </Button>
+                <Button color='blue.500' variant="solid" mr={3} onClick={onClose}>Close</Button>
             </ModalFooter>
             </ModalContent>
         </Modal>
@@ -75,4 +69,4 @@ function NodeModal(/*{children}*/){
     );
 }
 
-export default NodeModal
+export default NodeModal;
