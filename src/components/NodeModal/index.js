@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Button } from "@chakra-ui/button";
-import { Grid, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
+import DefaultText from '../DefaultText/index';
 
 import {
     Modal,
@@ -29,10 +30,22 @@ function NodeModal(props){
     }
 
     function createButtons(){
-        for (let i = 1; i <= number; i++) {
-            console.log(i);
-          }
+        const arr = []
+        for(let i = 0; i < number; i++){
+            arr.push(i)
+        }
+        return (
+            
+            <div>
+                {arr.map(() => (
+                    //<DefaultText/>
+                    console.log("Your mum")
+                ))}
+            </div>
+            
+        )
     }
+
     return(
         <>
         <Button style={{ display: "flex",  width: "100px", height: "100px", 
@@ -46,6 +59,11 @@ function NodeModal(props){
             <ModalCloseButton />
             <ModalBody>
                 <FormControl>
+                    <FormLabel>Name</FormLabel>
+                    <Input
+                    value = {text}
+                    onChange={(handleChange)}
+                    />
                     <FormLabel>How many family members do you want to add? Limit: 3</FormLabel>
                     <Input
                     type="number"
@@ -53,11 +71,6 @@ function NodeModal(props){
                     onChange={(handleNumberChange)}
                     />
                     <Button color='blue.500' variant="solid" mr={3} onClick={createButtons}>Add</Button>
-                    <FormLabel>Name</FormLabel>
-                    <Input
-                    value = {text}
-                        onChange={(handleChange)}
-                    />
                 </FormControl>
             </ModalBody>
             <ModalFooter>
