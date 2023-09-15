@@ -25,10 +25,15 @@ function NodeModal(props){
     const [number, setNumber] = useState(0);
     function handleNumberChange(event){
         if (event.target.value < 0) event.target.value = 0;
-        if (event.target.value > 3) event.target.value = 3;
+        if (event.target.value > 2) event.target.value = 2;
         setNumber(event.target.value);
     }
 
+    const arr = []
+    for(let i = 0; i < number; i++){
+        arr.push(i)
+    }
+    
     function createButtons(){
         const arr = []
         for(let i = 0; i < number; i++){
@@ -64,7 +69,7 @@ function NodeModal(props){
                     value = {text}
                     onChange={(handleChange)}
                     />
-                    <FormLabel>How many family members do you want to add? Limit: 3</FormLabel>
+                    <FormLabel>How many family members do you want to add? Limit: 2</FormLabel>
                     <Input
                     type="number"
                     value = {number}
