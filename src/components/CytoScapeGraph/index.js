@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { Button } from "@chakra-ui/button";
-import { useDisclosure } from '@chakra-ui/react';
+//import { Button } from "@chakra-ui/button";
+//import { useDisclosure } from '@chakra-ui/react';
 import Cytoscape from 'react-cytoscapejs';
 
+/** 
 import {
     Modal,
     ModalOverlay,
@@ -12,8 +13,9 @@ import {
     ModalBody,
     ModalCloseButton,
   } from '@chakra-ui/react';
+*/
 
-import { FormControl, FormLabel, Input} from '@chakra-ui/react';
+//import { FormControl, FormLabel, Input} from '@chakra-ui/react';
 
 function Graph(props){
     /**
@@ -75,15 +77,31 @@ function Graph(props){
 
     const graphData = {
         elements: [
-            { data: { id: 'one', label: 'Node 1' }, position: { x: 713, y: 158 } },
-            { data: { id: 'two', label: 'Node 2' }, position: { x: 595, y: 337 } },
-            { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
+            { data: { id: 'one'}, /*label: 'Node 1' }, position: { x: 713, y: 158 }*/ },
+            { data: { id: 'two'}, /*label: 'Node 2' }, /*position: { x: 595, y: 337 }*/ },
+            { data: { id: 'three'} },
+            { data: {id: 'four'} },
+            { data: { source: 'one', target: 'two' } },
+            { data: { source: 'two', target: 'three' } },
+            { data: { source: 'three', target: 'four' } },
+            { data: { source: 'four', target: 'five' } },
         ],
     };
 
+    const layout = {
+        name: 'dagre',
+    };
+    
+    const style = {
+        width: '800px',
+        height: '600px',
+    };
+
+      
     return(
-        <>
-        {/*<Button style={{ display: "none"}} onClick={onOpen}> <p1> {text} </p1>
+        <div style={style}>
+        {/* This piece of code is just a button and modal components from react-chakra
+         * <Button style={{ display: "none"}} onClick={onOpen}> <p1> {text} </p1>
         </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -112,8 +130,8 @@ function Graph(props){
             </ModalContent>
     </Modal>*/}
 
-    <Cytoscape elements={graphData.elements} style={ { width: '600px', height: '600px' } } />
-        </>
+        <Cytoscape elements={graphData.elements} layout = {layout} style={style} />
+        </div>
     );
 }
 
