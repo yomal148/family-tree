@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from '@chakra-ui/react';
-import DefaultText from '../DefaultText/index';
+import Cytoscape from 'react-cytoscapejs';
 
 import {
     Modal,
@@ -15,7 +15,11 @@ import {
 
 import { FormControl, FormLabel, Input} from '@chakra-ui/react';
 
-function NodeModal(props){
+function Graph(props){
+    /**
+     * This piece of code uses Chakra hook to open Modal by clicking button.
+     * Don't need it for now.
+     * 
     const { isOpen, onOpen, onClose } = useDisclosure();
     // set text for modal to empty string
     const [text, setText] = useState("");
@@ -50,12 +54,36 @@ function NodeModal(props){
             
         )
     }
+    */
+
+     // State to manage modal visibility
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    // State to store data for the clicked node
+    const [selectedNodeData, setSelectedNodeData] = useState(null);
+
+    // Function to open the modal and set node data
+    const openModal = (nodeData) => {
+        setSelectedNodeData(nodeData);
+        setModalIsOpen(true);
+    };
+
+    // Function to close the modal
+    const closeModal = () => {
+        setSelectedNodeData(null);
+        setModalIsOpen(false);
+    };
+
+    const graphData = {
+        elements: [
+            { data: { id: 'one', label: 'Node 1' }, position: { x: 713, y: 158 } },
+            { data: { id: 'two', label: 'Node 2' }, position: { x: 595, y: 337 } },
+            { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
+        ],
+    };
 
     return(
         <>
-        <Button style={{ display: "flex",  width: "100px", height: "100px", 
-        backgroundColor: "lightBlue", borderRadius: "50%", textAlign: "center", top: "-1px"
-        }} onClick={onOpen}> <p1> {text} </p1>
+        {/*<Button style={{ display: "none"}} onClick={onOpen}> <p1> {text} </p1>
         </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -82,9 +110,11 @@ function NodeModal(props){
                 <Button color='blue.500' variant="solid" mr={3} onClick={onClose}>Close</Button>
             </ModalFooter>
             </ModalContent>
-        </Modal>
+    </Modal>*/}
+
+    <Cytoscape elements={graphData.elements} style={ { width: '600px', height: '600px' } } />
         </>
     );
 }
 
-export default NodeModal;
+export default Graph;

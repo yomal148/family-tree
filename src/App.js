@@ -4,11 +4,12 @@ import './App.css';
 //import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 import backgroundImage from './img/family_tree.png';
-import NodeModal from './components/NodeModal';
+import CytoscapeGraph from './components/CytoScapeGraph';
 
-import { Button } from "@chakra-ui/button";
+//import { Button } from "@chakra-ui/button";
 
 import CytoscapeComponent from 'react-cytoscapejs';
+import {useEffect, useState} from 'react';
 
 const containerStyle= {
   width: '100vw',
@@ -21,29 +22,32 @@ const containerStyle= {
   justifyContent:'center',
 }
 
-const elements = [
-  { data: { id: 'one', label: 'Node 1' }, position: { x: 0, y: 0 } },
-  { data: { id: 'two', label: 'Node 2' }, position: { x: 100, y: 0 } },
-  { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
-];
 
 
 function App() {
+  // gives me coordinates to plug into Cytoscape Component
+  const [mouseCoordinates, setMouseCoordinates] = useState({x:0, y:0});
+	
+  	const mouseMoveHandler = (event) => {
+    	setMouseCoordinates({
+      		x:event.clientX,
+      		y:event.clientY
+    	});
+  	}
+  		
+  	useEffect(()=>{
+    	window.addEventListener('mousemove', mouseMoveHandler);
+    	return(()=>{
+      		window.removeEventListener('mousemove', mouseMoveHandler);
+    	})
+  	}, [])
+
   return (  
-    //{
-      /** 
-      <div style={containerStyle}>
-        <Button style={{ display: "flex",  width: "100px", height: "100px", 
-          backgroundColor: "lightBlue", borderRadius: "50%", textAlign: "center", top: '-1px', position: 'absolute', 
-          }}> <p1> Root </p1>
-        </Button> 
-        <NodeModal/>
-      </div>
-      */
-     // }
      <div style={containerStyle}>
-     <CytoscapeComponent elements={elements} style={ { width: '600px', height: '600px' } } />
+     <CytoscapeGraph/>
+      {/*Mouse Coordinates: x = {mouseCoordinates.x}, y={mouseCoordinates.y} */}
      </div>
+     
   );
 }
 
